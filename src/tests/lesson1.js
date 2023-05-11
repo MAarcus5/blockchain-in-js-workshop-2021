@@ -40,6 +40,8 @@ const main = () => {
   blockchain.blocks[nextBlock.hash] = nextBlock
   blockchain.blocks[nextCompetitionBlock.hash] = nextCompetitionBlock
 
+  console.log()
+
   let longestChain = blockchain.longestChain()
 
   console.assert(longestChain.length == 2, 'Block height should be 2')
