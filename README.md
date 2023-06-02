@@ -115,21 +115,21 @@ https://github.com/MAarcus5/blockchain-in-js-workshop-2021/commit/f372facc486219
 
 ### 代码 commint 地址
 
-https://github.com/CUITBlockchain/blockchain-in-js-workshop-2021/commit/25f3a0d83a9fff2b4514c5503f470df939d0c2af
+https://github.com/MAarcus5/blockchain-in-js-workshop-2021/commit/bfea86707fc589cb355e2862ea3820621fe33502
 
 
 ### 代码截图
 
 > 将截图上传至网盘，放入链接即可
 
-![](链接)
+[![pCpSXkR.jpg](https://s1.ax1x.com/2023/06/02/pCpSXkR.jpg)](https://imgse.com/i/pCpSXkR)
 
 
 ### 主观与讨论题内容
+本次实验实现了一个简化的区块链系统。关键组件包括UTXO（未花费的交易输出）、Transaction（交易）、UTXOPool（UTXO池）和Blockchain（区块链）。UTXO用于表示未花费的金额，Transaction用于表示交易，UTXOPool用于管理UTXO，Blockchain用于管理区块链。
+代码中的Block类代表区块，包含前一个区块的哈希值、时间戳、索引、数据等属性。计算区块的哈希值采用了sha256算法，验证区块的有效性需要满足指定的难度要求。实现过程中遇到了很多的困难，但是在同学和其他组的帮助下能够完成这次试验的内容，代码中的注释能更好的方便我们组理解和实现。
+整体思路是基于区块链的核心概念，通过链式链接每个区块，每个区块包含交易信息和UTXO池的状态。通过计算区块的哈希值和验证区块的有效性，确保区块链的安全性和一致性。这样的实现为构建更复杂的区块链系统打下了基础，可以进一步扩展和应用于加密货币等领域。
 
-
-
----
 
 
 
