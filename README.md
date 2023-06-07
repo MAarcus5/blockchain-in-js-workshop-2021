@@ -139,21 +139,22 @@ https://github.com/MAarcus5/blockchain-in-js-workshop-2021/commit/bfea86707fc589
 
 ### 代码 commint 地址
 
-https://github.com/CUITBlockchain/blockchain-in-js-workshop-2021/commit/25f3a0d83a9fff2b4514c5503f470df939d0c2af
+https://github.com/MAarcus5/blockchain-in-js-workshop-2021/commit/2d9a461e2825aebd75a00adf29472735c2bcf270
 
 
 ### 代码截图
 
 > 将截图上传至网盘，放入链接即可
 
-![](链接)
+[![pCFTMQg.png](https://s1.ax1x.com/2023/06/07/pCFTMQg.png)](https://imgse.com/i/pCFTMQg)
 
 
 ### 主观与讨论题内容
+本次实验内容涵盖了区块链的关键组件，包括区块、交易和UTXO池。通过构造函数、验证方法和处理函数，这些组件共同协作，实现了区块链的基本功能。区块链通过使用哈希算法确保数据的完整性和安全性。每个区块都包含前一区块的哈希值，以确保数据的连续性。而交易则被组合成区块，并通过默克尔树进行摘要计算，以保护交易数据的完整性。
+UTXO池起到管理账户余额的作用，它记录了未花费的交易输出，并在处理交易时更新余额。通过验证交易的合法性，确保账户拥有足够的余额进行交易。
+整体的实现过程相对困难，但在别的小组的帮助下能够勉强完成，加深了我们对区块链的工作原理基础的理解
 
 
-
----
 
 
 
