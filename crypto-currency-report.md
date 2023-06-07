@@ -97,11 +97,19 @@ https://github.com/CUITBlockchain/blockchain-in-js-workshop-2021/commit/25f3a0d8
 
 > 将截图上传至网盘，放入链接即可
 
-![](链接)
+[![pCFWfVf.png](https://s1.ax1x.com/2023/06/07/pCFWfVf.png)](https://imgse.com/i/pCFWfVf)
 
 
 ### 主观与讨论题内容
+整体思路如下：
+
+定义初始状态（initialState），包含世界各国的信息。
+编写 reducer 函数（worldReducer），根据不同的 action 类型来更新状态。在本例中，我们定义了添加国家和移除国家两种操作。
+创建 Redux store，并将 reducer 函数传入。这将创建一个用于管理状态的 store 对象。
+使用 store.getState() 获取当前状态，并打印初始状态。
+使用 store.dispatch() 发送 action 来触发状态更新。在本例中，我们先添加一个新国家，然后移除一个国家。
+使用 store.getState() 获取更新后的状态，并打印出来。
+通过以上步骤，我们使用 Redux 架构创建了一个简单的世界状态树，并进行了验证。你可以根据需求扩展该示例，添加更多的 action 类型和相应的状态更新逻辑。
 
 
 
----
