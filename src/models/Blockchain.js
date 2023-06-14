@@ -1,40 +1,58 @@
 import UTXOPool from './UTXOPool.js'
 
 class Blockchain {
-  // 1. 完成构造函数及其参数
-  /* 构造函数需要包含
-      - 名字
-      - 创世区块
-      - 存储区块的映射
-  */
-  constructor() {}
-
-  // 2. 定义 longestChain 函数
-  /*
-    返回当前链中最长的区块信息列表
-  */
-  longestChain() {
-    return []
+  constructor(name) {
+    this.name = name
+    this.blocks = {}
+    this.currentUTXOPool = new UTXOPool()
   }
 
-  // 判断当前区块链是否包含
+  longestChain() {
+    const maxHeightBlock = this.maxHeightBlock()
+    const chain = []
+    let currentBlock = maxHeightBlock
+
+    while (currentBlock) {
+      chain.unshift(currentBlock)
+      currentBlock = this.blocks[currentBlock.previousHash]
+    }
+
+    return chain
+  }
+
   containsBlock(block) {
-    // 添加判断方法
+    for (const key in this.blocks) {
+      if (this.blocks[key].hash === block.hash) {
+        return true
+      }
+    }
     return false
   }
 
-  // 获得区块高度最高的区块
   maxHeightBlock() {
-    // return Block
+    let maxHeight = -1
+    let maxHeightBlock = null
+
+    for (const key in this.blocks) {
+      const block = this.blocks[key]
+      if (block.index > maxHeight) {
+        maxHeight = block.index
+        maxHeightBlock = block
+      }
+    }
+
+    return maxHeightBlock
   }
 
-  // 添加区块
-  /*
-
-  */
   _addBlock(block) {
     if (!block.isValid()) return
     if (this.containsBlock(block)) return
+
+    this.blocks[block.hash] = block
+    if (block.index > (this.currentUTXOPool.blockIndex || -1)) {
+      this.currentUTXOPool = block.utxoPool
+      this.currentUTXOPool.blockIndex = block.index
+    }
   }
 }
 

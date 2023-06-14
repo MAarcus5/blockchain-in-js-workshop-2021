@@ -1,21 +1,53 @@
-import UTXO from './UTXO.js'
+import UTXO from './UTXO.js';
 
 class UTXOPool {
-  constructor(utxos = {}) {}
+  constructor(utxos = {}) {
+    this.utxos = utxos
+  }
 
-  addUTXO(publicKey, amount) {}
+  addUTXO(publicKey, amount) {
+    if (this.utxos[publicKey]) {
+      this.utxos[publicKey].amount += amount
+    } else {
+      this.utxos[publicKey] = new UTXO(publicKey, amount)
+    }
+  }
 
-  clone() {}
+  clone() {
+    const clonedUTXOPool = new UTXOPool()
+    clonedUTXOPool.utxos = { ...this.utxos }
+    return clonedUTXOPool
+  }
 
-  // 处理交易函数
-  handleTransaction() {}
+  handleTransaction(transaction) {
+    const senderUTXO = this.utxos[transaction.senderPublicKey]
+    const receiverUTXO = this.utxos[transaction.receiverPublicKey]
 
-  // 验证交易合法性
-  /**
-   * 验证余额
-   * 返回 bool
-   */
-  isValidTransaction() {}
+if (!senderUTXO || senderUTXO.amount < transaction.amount + transaction.fee) {
+  return false
+}
+
+senderUTXO.amount -= transaction.amount + transaction.fee
+
+if (receiverUTXO) {
+  receiverUTXO.amount += transaction.amount
+} else {
+  this.utxos[transaction.receiverPublicKey] = new UTXO(
+    transaction.receiverPublicKey,
+    transaction.amount
+  )
+}
+
+return true
+  }
+
+  isValidTransaction(transaction) {
+    const senderUTXO = this.utxos[transaction.senderPublicKey]
+    if (!senderUTXO) return false
+    if (senderUTXO.amount < transaction.amount + transaction.fee) return false
+
+return true
+  }
 }
 
 export default UTXOPool

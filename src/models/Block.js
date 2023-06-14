@@ -1,31 +1,53 @@
-import sha256 from 'crypto-js/sha256.js'
-
+import sha256 from 'crypto-js/sha256.js';
 export const DIFFICULTY = 2
 
 class Block {
-  // 1. 完成构造函数及其参数
+  constructor(blockchain, previousHash, index, payload, coinbaseBeneficiary) {
+    this.blockchain = blockchain
+    this.previousHash = previousHash
+    this.index = index
+    this.timestamp = new Date().getTime()
+    this.payload = payload
+    this.nonce = 0
+    this.coinbaseBeneficiary = coinbaseBeneficiary
+    this.transactions = []
+    this.utxoPool = this.blockchain.currentUTXOPool.clone()
+    this._setHash()
+  }
 
-  constructor() {}
+  isValid() {
+    return this.hash.substring(0, DIFFICULTY) === '0'.repeat(DIFFICULTY)
+  }
 
-  isValid() {}
+  setNonce(nonce) {
+    this.nonce = nonce
+    this._setHash()
+  }
 
-  setNonce(nonce) {}
+  _setHash() {
+    this.hash = sha256(
+      this.previousHash +
+        this.index +
+        this.timestamp +
+        this.payload +
+        this.nonce
+    ).toString()
+  }
 
-  // 根据交易变化更新区块 hash
-  _setHash() {}
+  combinedTransactionsHash() {
+    return sha256(
+      this.transactions.map((transaction) => transaction.hash).join('')
+    )
+  }
 
-  // 汇总计算交易的 Hash 值
-  /**
-   * 默克尔树实现
-   */
-  combinedTransactionsHash() {}
-
-  // 添加交易到区块
-  /**
-   *
-   * 需包含 UTXOPool 的更新与 hash 的更新
-   */
-  addTransaction() {}
+  addTransaction(transaction) {
+    if (this.utxoPool.isValidTransaction(transaction)) {
+      this.utxoPool.handleTransaction(transaction)
+      this.transactions.push(transaction)
+      this._setHash()
+    }
+    
+  }
 }
 
 export default Block
