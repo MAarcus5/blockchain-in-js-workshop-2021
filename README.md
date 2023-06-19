@@ -183,7 +183,17 @@ https://github.com/CUITBlockchain/blockchain-in-js-workshop-2021/commit/6d132c55
 
 ## 结课报告
 
+### 代码 commint 地址
 
+https://github.com/CUITBlockchain/blockchain-in-js-workshop-2021/commit/29883c37913a51fb2e79e4e16f358cd428483f00
 
+### 代码截图
+
+> 将截图上传至网盘，放入链接即可
+[![pC3NOfK.png](https://s1.ax1x.com/2023/06/19/pC3NOfK.png)](https://imgse.com/i/pC3NOfK)
+[![pC3NLY6.png](https://s1.ax1x.com/2023/06/19/pC3NLY6.png)](https://imgse.com/i/pC3NLY6)
+
+### 主观与讨论题内容
+在lesson7实验中，出现了一个导致失败的错误，错误信息为"TypeError: Cannot read properties of null (reading 'utxos')"这个错误的原因可能是代码中某个地方返回了`null`值，导致后续操作无法执行。在编写代码时，我们没能解决这个错误，使lesson7实验成功运行。这个过程也提醒我们在编写代码时要注意避免返回`null`值，并且合理处理可能发生的错误和异常情况。
 
 
