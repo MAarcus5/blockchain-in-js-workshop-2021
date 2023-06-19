@@ -1,3 +1,6 @@
 export default class UTXO {
-  constructor() {}
+  constructor(address, amount) {
+    this.address = address;
+    this.amount = amount;
+  }
 }

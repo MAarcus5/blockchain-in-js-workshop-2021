@@ -1,21 +1,44 @@
 import UTXO from './UTXO.js'
 
-class UTXOPool {
-  constructor(utxos = {}) {}
+export default class UTXOPool {
+  constructor() {
+    this.utxos = {};
+  }
 
-  addUTXO(publicKey, amount) {}
+  addUTXO(address, amount) {
+    this.utxos[address] = new UTXO(address, amount);
+  }
 
-  clone() {}
+  clone() {
+    const newPool = new UTXOPool();
+    newPool.utxos = { ...this.utxos };
+    return newPool;
+  }
 
-  // 处理交易函数
-  handleTransaction() {}
+  processTransaction(transaction) {
+    const senderUTXO = this.utxos[transaction.sender];
+    const receiverUTXO = this.utxos[transaction.receiver];
 
-  // 验证交易合法性
-  /**
-   * 验证余额
-   * 返回 bool
-   */
-  isValidTransaction() {}
+    senderUTXO.amount -= transaction.amount + transaction.fee;
+
+    if (!receiverUTXO) {
+      this.addUTXO(transaction.receiver, transaction.amount);
+    } else {
+      receiverUTXO.amount += transaction.amount;
+    }
+  }
+
+  isValidTransaction(transaction) {
+    const senderUTXO = this.utxos[transaction.sender];
+
+    if (!senderUTXO) {
+      return false;
+    }
+
+    if (senderUTXO.amount < transaction.amount + transaction.fee) {
+      return false;
+    }
+
+    return true;
+  }
 }
-
-export default UTXOPool
